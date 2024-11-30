@@ -18,3 +18,13 @@ function multiplyTwoNumbers(num1, num2){
 function divideTwoNumbers(num1, num2){
     return num1/num2;
 };
+
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => {
+    button.addEventListener('click', (event) => handleInputEvent(event));
+});
+
+function handleInputEvent(event){
+    console.log(event.target.id);
+};
