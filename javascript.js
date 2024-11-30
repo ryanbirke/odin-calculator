@@ -1,3 +1,8 @@
+let input1 = [];
+let input2 = [];
+let operator = [];
+let display = [];
+
 function addTwoNumbers(num1, num2){
     return num1 + num2;
 };
