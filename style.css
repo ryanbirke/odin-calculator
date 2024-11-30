@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.display {
+    box-sizing: border-box;
+    height: 50px;
+    width: 500px;
+    border-style: solid;
+    border-width: 0.1;
+    border-color: black;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: row;
+}
+
+.numbers {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.operators {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    box-sizing: border-box;
+    height: 50px;
+    width: 50px;
+    border-style: solid;
+    border-width: 0.1;
+    border-color: black;
+}
