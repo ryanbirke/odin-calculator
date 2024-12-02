@@ -83,8 +83,8 @@ function handleOperatorEvent(event){
         clearInputs(); 
     } else if (operator[0] === 'divide' && arrayToNumber(input2) === 0) {
         // handles div by 0 error message
-        input2.length = 0;
-        return updateDisplay("n0t c00l t0 div 0");
+        clearInputs();
+        return updateDisplay("RESTART: n0t c00l t0 div 0");
     } else if (operationID === 'equals') {
         if (input1.length > 0 && operator.length > 0 && input2.length > 0) {
             operate(input1, input2, operator);
