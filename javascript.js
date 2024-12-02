@@ -81,15 +81,17 @@ function handleOperatorEvent(event){
     const operationID = event.target.id;
     if (operationID === 'clear') {
         clearInputs(); 
+        updateDisplay('000000');
     } else if (operator[0] === 'divide' && arrayToNumber(input2) === 0) {
         // handles div by 0 error message
         clearInputs();
-        return updateDisplay("RESTART: n0t c00l t0 div 0");
+        updateDisplay("RESTART: n0t c00l t0 div 0");
+        return;
     } else if (operationID === 'equals') {
         if (input1.length > 0 && operator.length > 0 && input2.length > 0) {
             operate(input1, input2, operator);
         };
-    } else if (operator[0] === 'resultAsInput1' || operator.length === 0) {
+    } else if (operator[0] === 'resultAsInput1' || (input1.length > 0 && operator.length === 0)) {
         operator.length = 0;
         operator.push(operationID);
         console.log(`Operator is ${operationID}`);
@@ -98,7 +100,7 @@ function handleOperatorEvent(event){
         operator.length = 0;
         operator.push(operationID);
     } else {
-        updateDisplay('00ps')
+        updateDisplay('Input number first')
     };
     return;
 };
@@ -123,6 +125,7 @@ function operate(in1, in2, op){
 
 function updateDisplay(string){
     console.log(`Set display to ${string}`);
+    document.getElementById('display').textContent = string;
     return;
 };
 
