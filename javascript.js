@@ -21,8 +21,8 @@ operatorMap = {
     'subtract': subtractTwoNumbers,
     'multiply': multiplyTwoNumbers,
     'divide': divideTwoNumbers,
-    'clear': clearInputs,
-    'equals': operate,
+    'clear': '',
+    'equals': '',
 };
 
 function addTwoNumbers(num1, num2){
@@ -52,7 +52,6 @@ function clearInputs(){
 function arrayToNumber(arr){
     const concatArray = arr.join('');
     return Number(concatArray);
-    //handle case if array is empty
 };
 
 function handleInputEvent(event){
@@ -81,17 +80,22 @@ function handleNumberEvent(event){
 function handleOperatorEvent(event){
     const operationID = event.target.id;
     if (operationID === 'clear') {
-        clearInputs();  // does operatorMap[operationID] also work?
+        clearInputs(); 
+    } else if (operator[0] === 'divide' && arrayToNumber(input2) === 0) {
+        // handles div by 0 error message
+        input2.length = 0;
+        return updateDisplay("n0t c00l t0 div 0");
     } else if (operationID === 'equals') {
         if (input1.length > 0 && operator.length > 0 && input2.length > 0) {
             operate(input1, input2, operator);
         };
-    } else if (operator[0] === 'resultAsInput' || operator.length === 0) {
+    } else if (operator[0] === 'resultAsInput1' || operator.length === 0) {
         operator.length = 0;
         operator.push(operationID);
         console.log(`Operator is ${operationID}`);
     } else if (input1.length > 0 && operator.length > 0 && input2.length > 0) {
         operate(input1, input2, operator);
+        operator.length = 0;
         operator.push(operationID);
     } else {
         updateDisplay('00ps')
@@ -103,19 +107,22 @@ function operate(in1, in2, op){
     const operatorFunction = operatorMap[op[0]];
     const number1 = arrayToNumber(in1);
     const number2 = arrayToNumber(in2);
-    const result = operatorFunction(number1, number2);
+    let result = operatorFunction(number1, number2);
+    if (result.toString().length > 7) {
+        result = result.toFixed(5);
+    };
     console.log(`Result of ${number1}, ${op[0]}, ${number2} is ${result}`);
     clearInputs();
     output.length = 0;
     output.push(result);
     input1.push(result);
-    operator.push('resultAsInput');
+    operator.push('resultAsInput1');
     updateDisplay(result.toString());
     return;
 };
 
 function updateDisplay(string){
-    console.log(`Set display to ${output}`);
+    console.log(`Set display to ${string}`);
     return;
 };
 
